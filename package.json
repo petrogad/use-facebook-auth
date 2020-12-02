@@ -1,6 +1,11 @@
 {
   "name": "use-facebook-auth",
-  "version": "1.0.0",
+  "version": "0.1.0",
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "author": "Pete <pete@kreinto.io>",
   "description": "A React based hook for facebook authentication.",
   "main": "index.js",
   "scripts": {
@@ -33,9 +38,15 @@
     "type": "git",
     "url": "git+https://github.com/petrogad/use-facebook-auth.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "react-hooks",
+    "hooks",
+    "react",
+    "facebook",
+    "authenticate",
+    "auth"
+  ],
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/petrogad/use-facebook-auth/issues"
   },

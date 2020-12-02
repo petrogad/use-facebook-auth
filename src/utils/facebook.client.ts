@@ -3,6 +3,7 @@ declare let window: FacebookWindow;
 interface FacebookSDKInitParams {
   appId: string;
   version?: string;
+  language?: string;
 }
 
 export function initFacebookSdk(
@@ -36,21 +37,29 @@ export function initFacebookSdk(
       }
       const js: any = d.createElement(s);
       js.id = id;
-      js.src = 'https://connect.facebook.net/en_US/sdk.js';
+      js.src = `https://connect.facebook.net/${params.language ||
+        'en_US'}/sdk.js`;
       fjs && fjs.parentNode && fjs.parentNode.insertBefore(js, fjs);
     })(document, 'script', 'facebook-jssdk');
   });
 }
 
 export async function login(): Promise<StatusResponse | undefined> {
-  const authResponse = await new Promise(window.FB.login);
+  const authResponse: StatusResponse | undefined = await new Promise(resolve =>
+    window.FB.login(response => resolve(response))
+  );
+
   if (!authResponse) return undefined;
 
   return authResponse;
 }
 
-export async function logout() {
+export async function logout(): Promise<StatusResponse | undefined> {
   // revoke app permissions to logout completely because FB.logout() doesn't remove FB cookie
   await window.FB.api('/me/permissions', 'delete');
-  return await window.FB.logout();
+  const authResponse: StatusResponse | undefined = await new Promise(resolve =>
+    window.FB.logout(response => resolve(response))
+  );
+
+  return authResponse;
 }

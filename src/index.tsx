@@ -1,7 +1,11 @@
 import React, { ReactNode, useContext, useEffect, useState } from 'react';
 
 import { initFacebookSdk, login, logout } from './utils/facebook.client';
-import { AuthResponse, LoginStatus } from './utils/facebook.window';
+import {
+  AuthResponse,
+  LoginStatus,
+  StatusResponse,
+} from './utils/facebook.window';
 
 interface FacebookContextOptions {
   authenticatedState: AuthenticatedStatus;
@@ -57,33 +61,33 @@ export const FacebookProvider = ({
     authStatus: AuthenticatedStatus.LOADING,
   });
 
+  const handleSetAuthState = (response?: StatusResponse) => {
+    const authToken =
+      response && response.status === 'connected'
+        ? response.authResponse
+        : undefined;
+
+    setAuthState({
+      authStatus: authToken
+        ? AuthenticatedStatus.AUTHENTICATED
+        : AuthenticatedStatus.UNAUTHENTICATED,
+      authRequestStatus: response?.status,
+      authResponse: authToken,
+    });
+  };
+
   useEffect(() => {
     const initFacebook = async () => {
       const facebookFromHook = await initFacebookSdk({
         appId: options.appId,
       });
 
-      const authToken =
-        facebookFromHook && facebookFromHook.status === 'connected'
-          ? facebookFromHook.authResponse
-          : undefined;
-
-      setAuthState({
-        authStatus: authToken
-          ? AuthenticatedStatus.AUTHENTICATED
-          : AuthenticatedStatus.UNAUTHENTICATED,
-        authRequestStatus: facebookFromHook?.status,
-        authResponse: authToken,
-      });
+      handleSetAuthState(facebookFromHook);
     };
 
     initFacebook();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const handleLogin = (response?: StatusResponse): void => {};
-
-  const handleLogout = (response?: StatusResponse): void => {};
 
   return (
     <FacebookContext.Provider
@@ -95,11 +99,11 @@ export const FacebookProvider = ({
         user: {},
         logout: async () => {
           const response = await logout();
-          handleLogout(response);
+          handleSetAuthState(response);
         },
         login: async () => {
           const response = await login();
-          handleLogin(response);
+          handleSetAuthState(response);
         },
       }}
     >
