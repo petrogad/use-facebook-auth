@@ -16,8 +16,6 @@ interface FacebookContextOptions {
 	logout(): void;
 	login(): void;
 }
-const DEFAULT_REDIRECT_CALLBACK = () =>
-	window.history.replaceState({}, document.title, window.location.pathname);
 
 enum AuthenticatedStatus {
 	LOADING = 'loading',
@@ -54,7 +52,6 @@ interface AuthStateDef {
 
 export const FacebookProvider = ({
 	children,
-	onRedirectCallback = DEFAULT_REDIRECT_CALLBACK,
 	options,
 }: FacebookProviderParams) => {
 	const [authState, setAuthState] = useState<AuthStateDef>({
@@ -111,3 +108,5 @@ export const FacebookProvider = ({
 		</FacebookContext.Provider>
 	);
 };
+
+export default FacebookProvider;
