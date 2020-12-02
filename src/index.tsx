@@ -88,7 +88,7 @@ export const FacebookProvider = ({
   return (
     <FacebookContext.Provider
       value={{
-        authenticatedSession: authState.authStatus,
+        authenticatedState: authState.authStatus,
         isAuthenticated:
           authState.authStatus === AuthenticatedStatus.AUTHENTICATED,
         loading: authState.authStatus === AuthenticatedStatus.LOADING,
