@@ -35,7 +35,6 @@ export const FacebookContext = React.createContext<FacebookContextOptions>({
 
 interface FacebookProviderParams {
 	children: ReactNode;
-	onRedirectCallback(state?: string): void;
 	options: {
 		appId: string;
 	};

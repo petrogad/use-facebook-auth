@@ -1,13 +1,14 @@
 {
   "name": "use-facebook-auth",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "publishConfig": {
     "access": "public",
     "tag": "latest"
   },
   "author": "Pete <pete@kreinto.io>",
   "description": "A React based hook for facebook authentication.",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
@@ -70,5 +71,8 @@
     "singleQuote": true,
     "useTabs": true,
     "trailingComma": "es5"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }
