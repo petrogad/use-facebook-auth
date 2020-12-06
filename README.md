@@ -54,6 +54,16 @@ const MyMethod = () => {
 }
 ```
 
+## Additional Provider Options
+
+The Provider requires one option, the appId, but you can also pass in language and version if you wish to alter the defaults below:
+
+| Parameter  | Description                                                                                             |
+| :--------- | :------------------------------------------------------------------------------------------------------ |
+| `appId`    | _Required_ The facebook app your authentication associates too.                                         |
+| `version`  | Default: v8.0 - provide a specific [version](https://developers.facebook.com/docs/graph-api/changelog/) |
+| `language` | Default: en_US - Provide the language you wish to see translations in                                   |
+
 ## License
 
 **[MIT](LICENSE)** Licensed
