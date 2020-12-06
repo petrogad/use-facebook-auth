@@ -1,6 +1,6 @@
 import { FacebookWindow, StatusResponse } from './facebook.window';
 declare let window: FacebookWindow;
-interface FacebookSDKInitParams {
+export interface FacebookSDKInitParams {
 	appId: string;
 	version?: string;
 	language?: string;

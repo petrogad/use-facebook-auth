@@ -1,6 +1,11 @@
 import React, { ReactNode, useContext, useEffect, useState } from 'react';
 
-import { initFacebookSdk, login, logout } from './utils/facebook.client';
+import {
+	FacebookSDKInitParams,
+	initFacebookSdk,
+	login,
+	logout,
+} from './utils/facebook.client';
 import {
 	AuthResponse,
 	LoginStatus,
@@ -35,9 +40,7 @@ export const FacebookContext = React.createContext<FacebookContextOptions>({
 
 interface FacebookProviderParams {
 	children: ReactNode;
-	options: {
-		appId: string;
-	};
+	options: FacebookSDKInitParams;
 }
 
 export const useFacebook = () => useContext(FacebookContext);
@@ -74,9 +77,7 @@ export const FacebookProvider = ({
 
 	useEffect(() => {
 		const initFacebook = async () => {
-			const facebookFromHook = await initFacebookSdk({
-				appId: options.appId,
-			});
+			const facebookFromHook = await initFacebookSdk(options);
 
 			handleSetAuthState(facebookFromHook);
 		};
