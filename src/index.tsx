@@ -14,7 +14,7 @@ import {
 
 interface FacebookContextOptions {
 	authenticatedState: AuthenticatedStatus;
-	authenticatedSession?: {};
+	authenticatedSession?: AuthResponse;
 	isAuthenticated: boolean;
 	loading: boolean;
 	user: {};
