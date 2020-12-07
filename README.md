@@ -43,11 +43,19 @@ import { useFacebook } from 'use-facebook-auth';
 
 const MyMethod = () => {
 	const {
-		authenticatedState: 'loading' | 'error' | 'authenticated' | 'unauthenticated';
-		isAuthenticated: true | false //derived from the auth state;
-		loading: true | false //derived from the auth state;
-		logout(): void;
-		login(): void;
+		authenticatedSession: { // only comes back when authenticated
+			accessToken: 'string';
+			expiresIn: 'number';
+			signedRequest: 'string';
+			userID: 'string';
+			grantedScopes: 'string'; // optional
+			reauthorize_required_in: 'number'; // optional
+		},
+		authenticatedState: 'loading' | 'error' | 'authenticated' | 'unauthenticated',
+		isAuthenticated: true | false, //derived from the auth state;
+		loading: true | false, //derived from the auth state;
+		logout(): void,
+		login(): void
 	} = useFacebook();
 
 	return (<div>Hello</div>);
