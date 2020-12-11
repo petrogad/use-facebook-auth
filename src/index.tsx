@@ -36,7 +36,7 @@ export const FacebookContext = React.createContext<FacebookContextOptions>({
 	loading: true,
 	user: {},
 	logout: () => {},
-	login: (options: LoginOptions) => {},
+	login: () => {},
 });
 
 interface FacebookProviderParams {
