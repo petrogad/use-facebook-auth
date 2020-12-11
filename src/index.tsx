@@ -8,6 +8,7 @@ import {
 } from './utils/facebook.client';
 import {
 	AuthResponse,
+	LoginOptions,
 	LoginStatus,
 	StatusResponse,
 } from './utils/facebook.window';
@@ -19,7 +20,7 @@ interface FacebookContextOptions {
 	loading: boolean;
 	user: {};
 	logout(): void;
-	login(): void;
+	login(options: LoginOptions): void;
 }
 
 enum AuthenticatedStatus {
@@ -35,7 +36,7 @@ export const FacebookContext = React.createContext<FacebookContextOptions>({
 	loading: true,
 	user: {},
 	logout: () => {},
-	login: () => {},
+	login: (options: LoginOptions) => {},
 });
 
 interface FacebookProviderParams {
@@ -99,8 +100,8 @@ export const FacebookProvider = ({
 					const response = await logout();
 					handleSetAuthState(response);
 				},
-				login: async () => {
-					const response = await login();
+				login: async (options: LoginOptions) => {
+					const response = await login(options);
 					handleSetAuthState(response);
 				},
 			}}

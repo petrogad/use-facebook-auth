@@ -1,4 +1,4 @@
-# useFacebookAuth
+# use-facebook-auth
 
 A React based hook for facebook authentication.
 
@@ -40,6 +40,9 @@ Your App Id is the application you're using too authentcate against. Then on any
 ```js
 import { useFacebook } from 'use-facebook-auth';
 
+const loginOptions = {
+	scope: 'public_profile,email'
+}
 
 const MyMethod = () => {
 	const {
@@ -55,7 +58,7 @@ const MyMethod = () => {
 		isAuthenticated: true | false, //derived from the auth state;
 		loading: true | false, //derived from the auth state;
 		logout(): void,
-		login(): void
+		login(loginOptions): void
 	} = useFacebook();
 
 	return (<div>Hello</div>);
