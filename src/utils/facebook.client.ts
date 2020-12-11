@@ -1,4 +1,8 @@
-import { FacebookWindow, StatusResponse } from './facebook.window';
+import {
+	FacebookWindow,
+	LoginOptions,
+	StatusResponse,
+} from './facebook.window';
 declare let window: FacebookWindow;
 export interface FacebookSDKInitParams {
 	appId: string;
@@ -44,9 +48,13 @@ export function initFacebookSdk(
 	});
 }
 
-export async function login(): Promise<StatusResponse | undefined> {
+export async function login(
+	options: LoginOptions
+): Promise<StatusResponse | undefined> {
 	const authResponse: StatusResponse | undefined = await new Promise(resolve =>
-		window.FB.login(response => resolve(response))
+		window.FB.login(response => resolve(response), {
+			...options,
+		})
 	);
 
 	if (!authResponse) return undefined;

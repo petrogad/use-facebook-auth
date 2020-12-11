@@ -29,7 +29,7 @@ interface InitOptions {
 	autoLogAppEvents?: boolean;
 }
 
-interface LoginOptions {
+export interface LoginOptions {
 	auth_type?: 'reauthenticate' | 'reauthorize' | 'rerequest';
 	scope?: string;
 	return_scopes?: boolean;
